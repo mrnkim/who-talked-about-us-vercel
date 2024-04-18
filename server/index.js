@@ -17,20 +17,24 @@ const TWELVE_LABS_API_KEY = process.env.REACT_APP_API_KEY;
 const TWELVE_LABS_API = axios.create({
   baseURL: "https://api.twelvelabs.io/v1.1",
 });
-const PORT_NUMBER = process.env.REACT_APP_PORT_NUMBER
-  ? process.env.REACT_APP_PORT_NUMBER
-  : 4000;
+const PORT_NUMBER = process.env.REACT_APP_PORT_NUMBER || 4000;
 const PAGE_LIMIT_MAX = 50;
 
 /** Set up middleware for Express */
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://who-talked-about-us-vercel-client.vercel.app",
+  })
+);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 /** Define error handling middleware */
 const errorLogger = (error, request, response, next) => {
   console.error(error.stack);
-  next(error);
+  response
+    .status(error.status || 500)
+    .json({ error: "Something went wrong..." });
 };
 
 const errorHandler = (error, request, response, next) => {
