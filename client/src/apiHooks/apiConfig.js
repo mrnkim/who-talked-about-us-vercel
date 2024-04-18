@@ -1,10 +1,8 @@
 import axios from "axios";
 
-const SERVER_BASE_URL = window.location.hostname?.includes("replit")
-  ? new URL(`https://${window.location.hostname}:3000`)
-  : new URL(
-      `${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_PORT_NUMBER}`,
-    );
+const SERVER_BASE_URL = new URL(
+  "https://who-talked-about-us-vercel-server-iq8f7pyxj-mkims-projects.vercel.app"
+);
 
 const apiConfig = {
   TWELVE_LABS_API: axios.create({
