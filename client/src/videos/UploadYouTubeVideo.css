@@ -1,0 +1,83 @@
+.doNotLeaveMessageWrapper {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  align-self: center;
+  min-width: 35rem;
+  max-width: 45rem;
+  height: 3.4375rem;
+  padding: 0.625rem 0.75rem;
+  gap: 0.5rem;
+  border: 1px solid var(--TL-MossGreen-400, #B3D7C3);
+  background: var(--TL-MossGreen-50, #F7FBF9);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.icon {
+  margin-right: 0.3rem;
+}
+
+.doNotLeaveMessage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 0 0;
+  align-self: stretch;
+  color: var(--TL-Grey-900, #2D2D2D);
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem;
+}
+
+.taskVideoContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.taskVideo {
+  flex: 0 0 calc(33.3333% - 16px);
+  margin: 8px;
+}
+
+/* Style for one task video */
+.taskVideoContainer .taskVideo:only-child {
+  flex: 0 0 calc(100% - 16px);
+}
+
+.wrapper {
+  justify-content: center;
+  align-items: center;
+}
+
+.mainMessageWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom:2rem;
+  margin-top: 2rem;
+}
+
+.downloadSubmit {
+  font-size: 0.875rem;
+}
+
+.single-video {
+  max-width: 500px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

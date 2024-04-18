@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  font-family: 'Figtree', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  --TL-Black: #222;
+  --TL-Grey-900: #2D2D2D;
+  --TL-Grey--100: #F4F4F3;
+  --TL-Red-500: #F44336;
+  --TL-Green-500: #9AED59;
+  --TL-Green-300: #C3F49C;
+  --TL-MossGreen-400: #B3D7C3;
+  --TL-MossGreen-50: #F7FBF9;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
