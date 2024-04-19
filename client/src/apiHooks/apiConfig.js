@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const SERVER_BASE_URL = new URL(
-  "https://who-talked-about-us-vercel-server-iq8f7pyxj-mkims-projects.vercel.app"
+  "https://who-talked-about-us-vercel-server.vercel.app/"
 );
 
 const apiConfig = {
