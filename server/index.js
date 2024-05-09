@@ -23,7 +23,7 @@ const PAGE_LIMIT_MAX = 50;
 /** Set up middleware for Express */
 app.use(
   cors({
-    origin: "https://who-talked-about-us-vercel-client.vercel.app",
+    origin: "http://localhost:3000",
   })
 );
 app.use(bodyParser.json());
