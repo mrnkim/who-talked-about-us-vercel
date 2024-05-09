@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import { useContext } from "react";
-import setIndexIdContext from "../common/setIndexIdContext";
 import InputForm from "../common/InputForm";
 import icon from "../svg/Create.svg";
 import "./IndexForm.css";
-import { useCreateIndex } from "../apiHooks/apiHooks";
 
 /** Renders the input form for an index
  *
@@ -15,9 +12,6 @@ import { useCreateIndex } from "../apiHooks/apiHooks";
 function IndexForm() {
   const [indexName, setIndexName] = useState("");
   const [error, setError] = useState("");
-  const { setIndexId } = useContext(setIndexIdContext);
-
-  const createIndexMutation = useCreateIndex(setIndexId);
 
   function handleChange(evt) {
     const input = evt.target;

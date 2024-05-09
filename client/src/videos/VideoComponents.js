@@ -14,7 +14,6 @@ import backIcon from "../svg/Back.svg";
 import infoIcon from "../svg/Info.svg";
 import LoadingSpinner from "../common/LoadingSpinner";
 import "./VideoComponents.css";
-import setIndexIdContext from "../common/setIndexIdContext";
 
 const VID_PAGE_LIMIT = 12;
 
@@ -35,7 +34,6 @@ export function VideoComponents({
   const [searchQuery, setSearchQuery] = useState("");
   const [finalSearchQuery, setFinalSearchQuery] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { setIndexId } = useContext(setIndexIdContext);
 
   const queryClient = useQueryClient();
 
@@ -99,11 +97,11 @@ export function VideoComponents({
           <div className="videoSearchForm">
             <div className="title">Search Videos</div>
             {/* <div className="m-auto p-3"> */}
-              <SearchForm
-                setSearchQuery={setSearchQuery}
-                searchQuery={searchQuery}
-                setFinalSearchQuery={setFinalSearchQuery}
-              />
+            <SearchForm
+              setSearchQuery={setSearchQuery}
+              searchQuery={searchQuery}
+              setFinalSearchQuery={setFinalSearchQuery}
+            />
             {/* </div> */}
           </div>
 
@@ -187,7 +185,7 @@ export function VideoComponents({
 
       {!isSubmitting && (
         <div className="resetButtonWrapper">
-          <button className="resetButton" onClick={() => setIndexId(null)}>
+          <button className="resetButton">
             {backIcon && <img src={backIcon} alt="Icon" className="icon" />}
             &nbsp;Back to Start
           </button>

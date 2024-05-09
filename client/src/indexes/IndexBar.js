@@ -1,9 +1,7 @@
 import { useState, useContext } from "react";
-import setIndexIdContext from "../common/setIndexIdContext";
 import ErrorFallback from "../common/ErrorFallback";
 import { Modal, Button } from "react-bootstrap";
 import closeIcon from "../svg/Close.svg";
-import { useDeleteIndex } from "../apiHooks/apiHooks";
 import "./IndexBar.css";
 
 /** Index bar that shows index name and number of total videos
@@ -17,9 +15,7 @@ export function IndexBar({ index }) {
   const [showIndexId, setShowIndexId] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [deleteError, setDeleteError] = useState(null);
-  const { setIndexId } = useContext(setIndexIdContext);
 
-  const deleteIndexMutation = useDeleteIndex(setIndexId);
 
   const showDeleteConfirmationMessage = () => {
     setShowDeleteConfirmation(true);
