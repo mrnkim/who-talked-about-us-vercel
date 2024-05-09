@@ -12,7 +12,7 @@ import "./App.css";
  */
 
 function App() {
-  const INDEX_ID = process.env.REACT_INDEX_ID;
+  const INDEX_ID = process.env.REACT_APP_INDEX_ID;
 
   return (
     <div className="App">
