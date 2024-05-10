@@ -62,6 +62,16 @@ export function useGetAllAuthors(indexId) {
   });
 }
 
+export function useGetVideo(indexId, videoId) {
+  return useQuery({
+    queryKey: [keys.VIDEO, indexId, videoId],
+    queryFn: () =>
+      apiConfig.TWELVE_LABS_API.get(
+        `${apiConfig.INDEXES_URL}/${indexId}/videos/${videoId}`
+      ).then((res) => res.data),
+  });
+}
+
 export function useSearchVideo(indexId, query) {
   return useQuery({
     queryKey: [keys.SEARCH, indexId, query],

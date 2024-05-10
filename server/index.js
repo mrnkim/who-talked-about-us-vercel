@@ -124,26 +124,6 @@ app.post("/indexes", async (request, response, next) => {
   }
 });
 
-/** Deletes an index */
-app.delete("/indexes", async (request, response, next) => {
-  const headers = {
-    accept: "application/json",
-    "Content-Type": "application/json",
-    "x-api-key": TWELVE_LABS_API_KEY,
-  };
-  try {
-    const apiResponse = await TWELVE_LABS_API.delete(
-      `/indexes/${request.query.indexId}`,
-      {
-        headers,
-      }
-    );
-    response.json(apiResponse.data);
-  } catch (error) {
-    return next(error);
-  }
-});
-
 /** Get videos */
 app.get("/indexes/:indexId/videos", async (request, response, next) => {
   const headers = {
@@ -183,9 +163,6 @@ app.get("/indexes/:indexId/authors", async (request, response, next) => {
     const authors = new Set();
     let page = 1;
     let hasMore = true;
-
-    // 1. Map each video and get video details by video id
-    // 2. Retrieve author and add to authors set
 
     while (hasMore) {
       let videos = await TWELVE_LABS_API.get(`/indexes/${indexId}/videos`, {

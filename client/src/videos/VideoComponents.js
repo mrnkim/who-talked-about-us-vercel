@@ -142,6 +142,7 @@ export function VideoComponents({
                         <VideoList
                           videos={videos}
                           refetchVideos={refetchVideos}
+                          currIndex={currIndex}
                         />
                       </Suspense>
                     )}
