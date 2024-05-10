@@ -3,7 +3,6 @@ import { ErrorBoundary } from "react-error-boundary";
 import { useQueryClient } from "@tanstack/react-query";
 import { Container, Row } from "react-bootstrap";
 import { useGetVideos, useGetAllAuthors } from "../apiHooks/apiHooks";
-import UploadYoutubeVideo from "./UploadYouTubeVideo";
 import ErrorFallback from "../common/ErrorFallback";
 import keys from "../apiHooks/keys";
 import SearchForm from "../search/SearchForm";
@@ -66,19 +65,6 @@ export function VideoComponents({
 
   return (
     <>
-      <div className="videoUploadForm">
-        <div className="display-6 m-4">Upload New Videos</div>
-        <UploadYoutubeVideo
-          currIndex={currIndex}
-          taskVideos={taskVideos}
-          setTaskVideos={setTaskVideos}
-          refetchVideos={refetchVideos}
-          isSubmitting={isSubmitting}
-          setIsSubmitting={setIsSubmitting}
-          reset={reset}
-        />
-      </div>
-
       {videos && videos.length === 0 && (
         <div>
           {!taskVideos && (
