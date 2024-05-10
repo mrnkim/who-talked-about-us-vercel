@@ -169,15 +169,6 @@ export function VideoComponents({
           )}
         </div>
       )}
-
-      {!isSubmitting && (
-        <div className="resetButtonWrapper">
-          <button className="resetButton">
-            {backIcon && <img src={backIcon} alt="Icon" className="icon" />}
-            &nbsp;Back to Start
-          </button>
-        </div>
-      )}
     </>
   );
 }
