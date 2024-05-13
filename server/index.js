@@ -215,9 +215,9 @@ app.post("/search", async (request, response, next) => {
     search_options: ["visual", "conversation", "text_in_video", "logo"],
     query: request.body.query,
     group_by: "video",
-    sort_option: "clip_count",
+    sort_option: "score",
     threshold: "medium",
-    page_limit: 2,
+    page_limit: 3,
   };
 
   try {
