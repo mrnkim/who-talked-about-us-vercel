@@ -6,6 +6,7 @@ import LoadingSpinner from "../common/LoadingSpinner";
 import { ErrorBoundary } from "react-error-boundary";
 import keys from "../apiHooks/keys";
 import ErrorFallback from "../common/ErrorFallback";
+import { useGetVideo } from "../apiHooks/apiHooks";
 
 /** Shows list of the video in an index
  *
@@ -13,15 +14,23 @@ import ErrorFallback from "../common/ErrorFallback";
  *
  */
 
-function VideoList({ videos, refetchVideos }) {
-  const numVideos = videos.length;
+function VideoList({ videos, refetchVideos, currIndex }) {
+  const videoIds = videos.map((video) => video._id);
 
-  return videos.map((video, index) => (
+  const videosInfo = [];
+  videoIds.map((videoId) => {
+    const videoInfo = useGetVideo(currIndex, videoId);
+    videosInfo.push(videoInfo.data);
+  });
+
+  const numVideos = videosInfo.length;
+
+  return videosInfo.map((videoInfo, index) => (
     <ErrorBoundary
       FallbackComponent={ErrorFallback}
       onReset={() => refetchVideos()}
       resetKeys={[keys.VIDEOS, index]}
-      key={video._id + "-" + index}
+      key={videoInfo._id + "-" + index}
     >
       <Suspense fallback={<LoadingSpinner />}>
         <Col
@@ -33,15 +42,15 @@ function VideoList({ videos, refetchVideos }) {
         >
           {" "}
           <ReactPlayer
-            url={video.metadata.youtubeUrl}
+            url={videoInfo.source.url}
             controls
             width="100%"
             height="250px"
           />
           <div className="channelAndVideoName">
-            <div className="channelPillSmall">{video.metadata.author}</div>
+            <div className="channelPillSmall">{videoInfo.source.author}</div>
             <div className="filename-text">
-              {video.metadata.filename.replace(".mp4", "")}
+              {videoInfo.metadata.filename.replace(".mp4", "")}
             </div>
           </div>
         </Col>

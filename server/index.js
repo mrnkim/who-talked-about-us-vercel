@@ -23,7 +23,7 @@ const PAGE_LIMIT_MAX = 50;
 /** Set up middleware for Express */
 app.use(
   cors({
-    origin: "https://who-talked-about-us-vercel-client.vercel.app",
+    origin: "http://localhost:3000",
   })
 );
 app.use(bodyParser.json());
@@ -124,26 +124,6 @@ app.post("/indexes", async (request, response, next) => {
   }
 });
 
-/** Deletes an index */
-app.delete("/indexes", async (request, response, next) => {
-  const headers = {
-    accept: "application/json",
-    "Content-Type": "application/json",
-    "x-api-key": TWELVE_LABS_API_KEY,
-  };
-  try {
-    const apiResponse = await TWELVE_LABS_API.delete(
-      `/indexes/${request.query.indexId}`,
-      {
-        headers,
-      }
-    );
-    response.json(apiResponse.data);
-  } catch (error) {
-    return next(error);
-  }
-});
-
 /** Get videos */
 app.get("/indexes/:indexId/videos", async (request, response, next) => {
   const headers = {
@@ -154,7 +134,6 @@ app.get("/indexes/:indexId/videos", async (request, response, next) => {
   const params = {
     page: request.query.page,
     page_limit: request.query.page_limit,
-    whoTalkedAboutUs: true,
   };
 
   try {
@@ -186,26 +165,29 @@ app.get("/indexes/:indexId/authors", async (request, response, next) => {
     let hasMore = true;
 
     while (hasMore) {
-      let apiResponse = await TWELVE_LABS_API.get(
-        `/indexes/${indexId}/videos`,
-        {
-          headers,
-          params: {
-            page,
-            page_limit: PAGE_LIMIT_MAX,
-            whoTalkedAboutUs: true,
-          },
-        }
-      );
-      apiResponse = apiResponse.data;
+      let videos = await TWELVE_LABS_API.get(`/indexes/${indexId}/videos`, {
+        headers,
+        params: {
+          page,
+          page_limit: PAGE_LIMIT_MAX,
+        },
+      });
+      videos = videos.data;
 
-      if (apiResponse && apiResponse.data.length > 0) {
-        apiResponse.data.forEach((video) => {
-          const sanitizedAuthor = sanitize(`${video.metadata.author}`);
-          authors.add(sanitizedAuthor);
-        });
+      if (videos && videos.data.length > 0) {
+        await Promise.all(
+          videos.data.map(async (video) => {
+            const videoInfo = await TWELVE_LABS_API.get(
+              `/indexes/${indexId}/videos/${video._id}`,
+              { headers }
+            );
 
-        if (apiResponse.page_info && apiResponse.page_info.total_page > page) {
+            const author = videoInfo.data?.source?.name;
+            authors.add(author);
+          })
+        );
+
+        if (videos.page_info && videos.page_info.total_page > page) {
           page++;
         } else {
           hasMore = false;
@@ -233,9 +215,9 @@ app.post("/search", async (request, response, next) => {
     search_options: ["visual", "conversation", "text_in_video", "logo"],
     query: request.body.query,
     group_by: "video",
-    sort_option: "clip_count",
+    sort_option: "score",
     threshold: "medium",
-    page_limit: 2,
+    page_limit: 3,
   };
 
   try {

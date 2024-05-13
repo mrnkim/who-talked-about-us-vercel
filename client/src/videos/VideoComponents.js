@@ -3,7 +3,6 @@ import { ErrorBoundary } from "react-error-boundary";
 import { useQueryClient } from "@tanstack/react-query";
 import { Container, Row } from "react-bootstrap";
 import { useGetVideos, useGetAllAuthors } from "../apiHooks/apiHooks";
-import UploadYoutubeVideo from "./UploadYouTubeVideo";
 import ErrorFallback from "../common/ErrorFallback";
 import keys from "../apiHooks/keys";
 import SearchForm from "../search/SearchForm";
@@ -14,7 +13,6 @@ import backIcon from "../svg/Back.svg";
 import infoIcon from "../svg/Info.svg";
 import LoadingSpinner from "../common/LoadingSpinner";
 import "./VideoComponents.css";
-import setIndexIdContext from "../common/setIndexIdContext";
 
 const VID_PAGE_LIMIT = 12;
 
@@ -35,7 +33,6 @@ export function VideoComponents({
   const [searchQuery, setSearchQuery] = useState("");
   const [finalSearchQuery, setFinalSearchQuery] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { setIndexId } = useContext(setIndexIdContext);
 
   const queryClient = useQueryClient();
 
@@ -68,19 +65,6 @@ export function VideoComponents({
 
   return (
     <>
-      <div className="videoUploadForm">
-        <div className="display-6 m-4">Upload New Videos</div>
-        <UploadYoutubeVideo
-          currIndex={currIndex}
-          taskVideos={taskVideos}
-          setTaskVideos={setTaskVideos}
-          refetchVideos={refetchVideos}
-          isSubmitting={isSubmitting}
-          setIsSubmitting={setIsSubmitting}
-          reset={reset}
-        />
-      </div>
-
       {videos && videos.length === 0 && (
         <div>
           {!taskVideos && (
@@ -99,11 +83,11 @@ export function VideoComponents({
           <div className="videoSearchForm">
             <div className="title">Search Videos</div>
             {/* <div className="m-auto p-3"> */}
-              <SearchForm
-                setSearchQuery={setSearchQuery}
-                searchQuery={searchQuery}
-                setFinalSearchQuery={setFinalSearchQuery}
-              />
+            <SearchForm
+              setSearchQuery={setSearchQuery}
+              searchQuery={searchQuery}
+              setFinalSearchQuery={setFinalSearchQuery}
+            />
             {/* </div> */}
           </div>
 
@@ -144,6 +128,7 @@ export function VideoComponents({
                         <VideoList
                           videos={videos}
                           refetchVideos={refetchVideos}
+                          currIndex={currIndex}
                         />
                       </Suspense>
                     )}
@@ -182,15 +167,6 @@ export function VideoComponents({
               </div>
             </div>
           )}
-        </div>
-      )}
-
-      {!isSubmitting && (
-        <div className="resetButtonWrapper">
-          <button className="resetButton" onClick={() => setIndexId(null)}>
-            {backIcon && <img src={backIcon} alt="Icon" className="icon" />}
-            &nbsp;Back to Start
-          </button>
         </div>
       )}
     </>

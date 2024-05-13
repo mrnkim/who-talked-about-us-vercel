@@ -33,34 +33,6 @@ export function useGetIndex(indexId) {
   });
 }
 
-export function useCreateIndex(setIndexId) {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (indexName) =>
-      apiConfig.TWELVE_LABS_API.post(apiConfig.INDEXES_URL, { indexName }).then(
-        (res) => res.data
-      ),
-    onSuccess: (newIndex) => {
-      setIndexId(newIndex._id);
-      queryClient.invalidateQueries([keys.INDEX, newIndex._id]);
-    },
-    mutationKey: "createIndex",
-  });
-}
-
-export function useDeleteIndex(setIndexId) {
-  return useMutation({
-    mutationFn: (indexId) =>
-      apiConfig.TWELVE_LABS_API.delete(
-        `${apiConfig.INDEXES_URL}?indexId=${indexId}`
-      ).then((res) => res.data),
-    onSuccess: () => {
-      setIndexId(null);
-    },
-    mutationKey: "deleteIndex",
-  });
-}
-
 export function useGetVideos(indexId, page, pageLimit) {
   return useQuery({
     queryKey: [keys.VIDEOS, indexId, page],
@@ -86,6 +58,16 @@ export function useGetAllAuthors(indexId) {
     queryFn: () =>
       apiConfig.TWELVE_LABS_API.get(
         `${apiConfig.INDEXES_URL}/${indexId}/authors`
+      ).then((res) => res.data),
+  });
+}
+
+export function useGetVideo(indexId, videoId) {
+  return useQuery({
+    queryKey: [keys.VIDEO, indexId, videoId],
+    queryFn: () =>
+      apiConfig.TWELVE_LABS_API.get(
+        `${apiConfig.INDEXES_URL}/${indexId}/videos/${videoId}`
       ).then((res) => res.data),
   });
 }
