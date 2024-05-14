@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const SERVER_BASE_URL = new URL("http://localhost:4000/");
+const SERVER_BASE_URL = new URL("who-talked-about-us-vercel-server.vercel.app");
 
 const apiConfig = {
   TWELVE_LABS_API: axios.create({
