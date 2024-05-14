@@ -1,4 +1,4 @@
-import { React, useContext } from "react";
+import { React } from "react";
 import WarningIcon from "../svg/Warning.svg";
 import "./ErrorFallback.css";
 
@@ -11,7 +11,6 @@ function ErrorFallback({ error }) {
         <img src={WarningIcon} alt="WarningIcon" className="icon"></img>
         <div className="warningMessage">{error?.message || error.error}</div>
       </div>
-      <button className="resetButton">Go back</button>
     </div>
   );
 }
