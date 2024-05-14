@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import ErrorFallback from "../common/ErrorFallback";
 import { Modal, Button } from "react-bootstrap";
 import closeIcon from "../svg/Close.svg";
@@ -15,7 +15,6 @@ export function IndexBar({ index }) {
   const [showIndexId, setShowIndexId] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [deleteError, setDeleteError] = useState(null);
-
 
   const showDeleteConfirmationMessage = () => {
     setShowDeleteConfirmation(true);
