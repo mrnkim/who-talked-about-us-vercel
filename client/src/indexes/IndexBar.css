@@ -13,13 +13,7 @@
     font-size: 1.1rem;
   }
 
-  .indexId {
-    margin-left: 10px;
-    font-style: italic;
-  }
-
   .default-index {
-    cursor: pointer;
     display: flex;
     height: 3rem;
     width: 90%;
@@ -29,18 +23,6 @@
     gap: 0.25rem;
     background: var(--TL-Green-500, #9AED59)
     }
-
-  .default-index:hover {
-    display: flex;
-    height: 3rem;
-    width: 90%;
-    padding: 0.25rem 0.75rem;
-    justify-content: center;
-    align-items: center;
-    gap: 0.25rem;
-    border: 1px solid var(--TL-Green-500, #9AED59);
-    background: var(--TL-Grey--100, #F4F4F3);
-  }
 
   .deleteButtonWrapper {
     margin-left: auto;
