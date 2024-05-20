@@ -217,7 +217,8 @@ app.post("/search", async (request, response, next) => {
     group_by: "video",
     sort_option: "score",
     threshold: "medium",
-    page_limit: 3,
+    adjust_confidence_level: 0.6,
+    page_limit: 5,
   };
 
   try {
