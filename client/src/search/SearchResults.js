@@ -141,10 +141,16 @@ function SearchResults({ currIndex, finalSearchQuery, allAuthors }) {
   };
 
   useEffect(() => {
+    queryClient.invalidateQueries({
+      queryKey: [keys.SEARCH, currIndex, finalSearchQuery],
+    });
+  }, [currIndex, finalSearchQuery]);
+
+  useEffect(() => {
     setNextPageToken(initialNextPageToken);
     setCombinedSearchResultVideos(initialSearchResultVideos);
     setCombinedSearchResults(initialSearchResults);
-  }, [initialNextPageToken]);
+  }, [initialNextPageToken, initialSearchResults]);
 
   useEffect(() => {
     const organizedResults = organizeResults(
@@ -153,12 +159,6 @@ function SearchResults({ currIndex, finalSearchQuery, allAuthors }) {
     );
     setOrganizedResults(organizedResults);
   }, [combinedSearchResults, combinedSearchResultVideos]);
-
-  useEffect(() => {
-    queryClient.invalidateQueries({
-      queryKey: [keys.SEARCH, currIndex, finalSearchQuery],
-    });
-  }, [currIndex, finalSearchQuery]);
 
   return (
     <div>

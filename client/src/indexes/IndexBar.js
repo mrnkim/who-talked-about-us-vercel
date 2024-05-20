@@ -15,7 +15,6 @@ export function IndexBar({ index }) {
             <div>
               <i className="bi bi-folder"></i>
               <span className="indexName">{index.index_name}</span>
-              <span>({index && index.video_count} videos)</span>
             </div>
           </div>
         </div>
