@@ -69,9 +69,7 @@ function VideoList({ videos, refetchVideos, currIndex }) {
                 height="250px"
               />
               <div className="channelAndVideoName">
-                <div className="channelPillSmall">
-                  {videoInfo?.source.author}
-                </div>
+                <div className="channelPillSmall">{videoInfo?.source.name}</div>
                 <div className="filename-text">
                   {videoInfo?.metadata.filename.replace(".mp4", "")}
                 </div>

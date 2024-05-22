@@ -102,7 +102,7 @@ export function VideoComponents({
                   resetKeys={[keys.AUTHORS, currIndex]}
                 >
                   <div className="subtitle">
-                    All Influencers in Index ({authors?.length || 0}){" "}
+                    All Influencers ({authors?.length || 0}){" "}
                   </div>
                   {authors.sort().map((author) => (
                     <div key={author} className="channelPill">
