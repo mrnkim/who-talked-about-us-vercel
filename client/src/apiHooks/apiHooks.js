@@ -1,10 +1,4 @@
-import {
-  useQuery,
-  useQueries,
-  useMutation,
-  useQueryClient,
-  useInfiniteQuery,
-} from "@tanstack/react-query";
+import { useQuery, useQueries, useInfiniteQuery } from "@tanstack/react-query";
 import keys from "./keys";
 import apiConfig from "./apiConfig";
 
@@ -62,14 +56,23 @@ export function useGetAllAuthors(indexId) {
   });
 }
 
-export function useGetVideo(indexId, videoId) {
-  return useQuery({
-    queryKey: [keys.VIDEO, indexId, videoId],
-    queryFn: () =>
-      apiConfig.TWELVE_LABS_API.get(
-        `${apiConfig.INDEXES_URL}/${indexId}/videos/${videoId}`
-      ).then((res) => res.data),
-  });
+export async function fetchVideo(queryClient, indexId, videoId) {
+  try {
+    const response = await queryClient.fetchQuery({
+      queryKey: [keys.VIDEO, indexId, videoId],
+      queryFn: async () => {
+        const response = await apiConfig.TWELVE_LABS_API.get(
+          `${apiConfig.INDEXES_URL}/${indexId}/videos/${videoId}`
+        );
+        const data = response.data;
+        return data;
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error fetching next page of search results:", error);
+    throw error;
+  }
 }
 
 export function useSearchVideo(indexId, query) {
