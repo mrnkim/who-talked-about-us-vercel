@@ -42,7 +42,7 @@ function SearchForm({ searchQuery, setSearchQuery, setFinalSearchQuery }) {
       <InputForm
         handleSubmit={handleSubmit}
         handleChange={handleChange}
-        type="What are you looking for? (e.g., applying MAC gold highlighter)"
+        type="What are you looking for? (e.g., Rare Beauty lip oil, Korean products, Fenty Beauty...)"
         icon={searchIcon}
         value={searchQuery}
         className="searchTextField"
